@@ -14,6 +14,6 @@ namespace ViewComponentEmployee.Models
         Employee Add(Employee employee);
         Employee Delete(int id);
 
-        //IEnumerable<DeptHeadCount> EmployeeCountByDept();
+        IEnumerable<DeptHeadCount> EmployeeCountByDept();
     }
 }
