@@ -9,7 +9,10 @@ namespace ViewComponentEmployee.Models
     {
 
         IEnumerable<Employee> GetEmployees();
-        Employee GetEmployee(int id);
+        //Employee GetEmployee(int id);
+
+        IEnumerable<Employee> GetEmployee(int id);
+
         Employee Update(Employee updatedemployee);
         Employee Add(Employee employee);
         Employee Delete(int id);
