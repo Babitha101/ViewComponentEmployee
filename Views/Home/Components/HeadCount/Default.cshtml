@@ -1,0 +1,29 @@
+﻿
+
+@model IEnumerable<DeptHeadCount>
+
+<h3>Employee Head Count Summary</h3>
+<br /><br />
+
+<table class="table-bordered" align="center">
+    <thead class="thead-light">
+        <tr>
+            <th>Department</th>
+            <th>Head Count  </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var deptCount in Model)
+        {
+            <tr>
+                <td>
+                    @deptCount.Department
+                </td>
+                <td>
+                    @deptCount.Count
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
