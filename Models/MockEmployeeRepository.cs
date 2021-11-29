@@ -11,11 +11,11 @@ namespace ViewComponentEmployee.Models
 
         public MockEmployeeRepository()
         {
-            _employeeList = new List<Employee>(){ new Employee { empid=1,empname="John",Department="HR",Email="john@abc.com"},
-                new Employee { empid = 2, empname = "Arjun", Department = "IT", Email = "arjun@abc.com" },
-                new Employee { empid = 3, empname = "Kamal", Department = "Payroll", Email = "john@abc.com" },
-                new Employee { empid = 4, empname = "Divya", Department = "HR", Email = "john@abc.com" },
-                new Employee { empid = 5, empname = "Neha", Department = "Payroll", Email = "john@abc.com" }};
+            //_employeeList = new List<Employee>(){ new Employee { empid=1,empname="John",Department="HR",Email="john@abc.com"},
+            //    new Employee { empid = 2, empname = "Arjun", Department = "IT", Email = "arjun@abc.com" },
+            //    new Employee { empid = 3, empname = "Kamal", Department = "Payroll", Email = "john@abc.com" },
+            //    new Employee { empid = 4, empname = "Divya", Department = "HR", Email = "john@abc.com" },
+            //    new Employee { empid = 5, empname = "Neha", Department = "Payroll", Email = "john@abc.com" }};
 
         }
         public Employee Add(Employee employee)
@@ -38,16 +38,25 @@ namespace ViewComponentEmployee.Models
                 }).ToList();
         }
 
-        public IEnumerable<Employee> GetEmployee(int id)
-        {
-            Employee empModel = new Employee();
+        //public IEnumerable<Employee> GetEmployee(int id)
+        //{
+        //    id = 1;
+        //    //Employee empModel = new Employee();
 
 
-            var resultList = _employeeList.Where(x => x.empid == id);
+        //    return _employeeList.Where(x => x.empid == id)
+        //         .Select(g => new Employee()
+        //         {
+        //             empid = g.empid,
+        //             empname = g.empname,
+        //             Email = g.Email,
+        //             Department = g.Department
 
-            return resultList;
-            
-        }
+        //         }).ToList();
+
+        //    //return resultList;
+
+        //}
 
         public IEnumerable<Employee> GetEmployees()
         {

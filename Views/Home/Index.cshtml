@@ -1,8 +1,26 @@
-﻿@{
+﻿@*@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    
+
     @await Component.InvokeAsync("HeadCount")
-</div>
+
+    @await Component.InvokeAsync("Edit")
+</div>*@
+
+
+@{
+    ViewData["Title"] = "EmployeeDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Employee Detail</h1>
+<head>
+    <title>Employee</title>
+</head>
+<body>
+  
+</body>
+
+
+

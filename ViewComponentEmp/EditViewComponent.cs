@@ -14,12 +14,11 @@ namespace ViewComponentEmployee.ViewComponentEmp
         {
             this.employeeRepository = employeeRepository;
         }
-        public IViewComponentResult Invoke(Employee employee)
+        public IViewComponentResult Invoke(int id)
         {
-            return View(employee);
+            //var employeeList = employeeRepository.GetEmployee(id);
+            //return View(employeeList);
+            return View();
         }
     }
-
-
-
 }
