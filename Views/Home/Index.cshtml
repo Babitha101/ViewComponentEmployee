@@ -1,16 +1,19 @@
-﻿@*@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
 
-    @await Component.InvokeAsync("HeadCount")
+    @*@await Component.InvokeAsync("HeadCount")*@
 
-    @await Component.InvokeAsync("Edit")
-</div>*@
+    @*@await Component.InvokeAsync("Edit")*@
+
+    @await Component.InvokeAsync("EmployeeDetails")
+
+</div>
 
 
-@{
+@*@{
     ViewData["Title"] = "EmployeeDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,7 +23,7 @@
 </head>
 <body>
   
-</body>
+</body>*@
 
 
 

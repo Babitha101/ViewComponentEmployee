@@ -9,23 +9,17 @@ using MongoDB.Bson;
 
 namespace ViewComponentEmployee.ViewComponentEmp
 {
-    public class EditViewComponent : ViewComponent
+    public class EmployeeDetailsViewComponent : ViewComponent
     {
         IMongoClient mongoClient = new MongoClient("mongodb://localhost:27017");
-
-        //public EditViewComponent(IEmployeeRepository employeeRepository)
-        //{
-        //    this.employeeRepository = employeeRepository;
-        //}
-
-        public IViewComponentResult Invoke(string id)   
+        public IViewComponentResult Invoke()
         {
             var database = mongoClient.GetDatabase("Employee");
             var collection = database.GetCollection<Employee>("Employees");
-
-            var EmployeeResult = collection.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).SingleOrDefault();
-            return View("Default", EmployeeResult);
-          
+            var EmployeeResult = collection.Find<Employee>(a => true).ToList();
+            return View(EmployeeResult);
         }
+
     }
+
 }

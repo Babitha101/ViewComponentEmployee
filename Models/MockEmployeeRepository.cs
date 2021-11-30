@@ -7,23 +7,23 @@ namespace ViewComponentEmployee.Models
 {
     public class MockEmployeeRepository : IEmployeeRepository
     {
-        private List<Employee> _employeeList;
+        private List<HeadCountModel> _employeeList;
 
         public MockEmployeeRepository()
         {
-            //_employeeList = new List<Employee>(){ new Employee { empid=1,empname="John",Department="HR",Email="john@abc.com"},
-            //    new Employee { empid = 2, empname = "Arjun", Department = "IT", Email = "arjun@abc.com" },
-            //    new Employee { empid = 3, empname = "Kamal", Department = "Payroll", Email = "john@abc.com" },
-            //    new Employee { empid = 4, empname = "Divya", Department = "HR", Email = "john@abc.com" },
-            //    new Employee { empid = 5, empname = "Neha", Department = "Payroll", Email = "john@abc.com" }};
+            _employeeList = new List<HeadCountModel>(){ new HeadCountModel { id=1,empname="John",Department="HR",Email="john@abc.com"},
+                new HeadCountModel { id = 2, empname = "Arjun", Department = "IT", Email = "arjun@abc.com" },
+                new HeadCountModel { id = 3, empname = "Kamal", Department = "Payroll", Email = "john@abc.com" },
+                new HeadCountModel { id = 4, empname = "Divya", Department = "HR", Email = "john@abc.com" },
+                new HeadCountModel { id = 5, empname = "Neha", Department = "Payroll", Email = "john@abc.com" }};
 
         }
-        public Employee Add(Employee employee)
+        public HeadCountModel Add(HeadCountModel employee)
         {
             throw new NotImplementedException();
         }
 
-        public Employee Delete(int id)
+        public HeadCountModel Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -58,12 +58,12 @@ namespace ViewComponentEmployee.Models
 
         //}
 
-        public IEnumerable<Employee> GetEmployees()
+        public IEnumerable<HeadCountModel> GetEmployees()
         {
             throw new NotImplementedException();
         }
 
-        public Employee Update(Employee updatedemployee)
+        public HeadCountModel Update(HeadCountModel updatedemployee)
         {
             throw new NotImplementedException();
         }

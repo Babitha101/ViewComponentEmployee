@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using ViewComponentEmployee.Models;
 
 using MongoDB.Driver;
+using MongoDB.Bson;
+using System.ComponentModel;
 
 namespace ViewComponentEmployee.Controllers
 {
@@ -14,7 +16,7 @@ namespace ViewComponentEmployee.Controllers
     {
         IMongoClient mongoClient = new MongoClient("mongodb://localhost:27017");
 
-        private List<Employee> _employeeList;
+        //private List<Employee> _employeeList;
 
         public EmployeeController()
         {
@@ -45,62 +47,78 @@ namespace ViewComponentEmployee.Controllers
         public ActionResult Create()
         {
             Employee empModel = new Employee();
-            return View("CreateEdit", empModel);
+            return View("Create", empModel);
         }
 
         // POST: EmployeeController/Create
         [HttpPost]
+
         [ValidateAntiForgeryToken]
         public ActionResult Create(Employee employee)
         {
             try
             {
-                var database = mongoClient.GetDatabase("Employee");
-                var collection = database.GetCollection<Employee>("Employees");
-                collection.InsertOne(employee);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var database = mongoClient.GetDatabase("Employee");
+
+                    var collection = database.GetCollection<Employee>("Employees");
+
+                    // var EmployeeResult = collection.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).SingleOrDefault();
+
+                    collection.InsertOne(employee);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
+
             }
+            return View();
+
         }
 
         // GET: EmployeeController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(string id)
         {
-            id = 1;
-            //Employee empModel = new Employee();
 
+            return ViewComponent("Edit",id);
 
-            //var empList= _employeeList.Where(x => x.empid == id)
-            //     .Select(g => new Employee()
-            //     {
-            //         empid = g.empid,
-            //         empname = g.empname,
-            //         Email = g.Email,
-            //         Department = g.Department
+            //var database = mongoClient.GetDatabase("Employee");
+            //var collection = database.GetCollection<Employee>("Employees");
 
-            //     }).ToList();
+            //var EmployeeResult = collection.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).SingleOrDefault();
+            //return View("Edit", EmployeeResult);
 
-            //return View(empList);
-            return View();
         }
 
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(string id, Employee employee)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var database = mongoClient.GetDatabase("Employee");
+
+                    var collection = database.GetCollection<Employee>("Employees");
+
+                    var update = collection.FindOneAndUpdateAsync(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id)), Builders<Employee>.Update.Set("empname",employee.empname).Set("Department", employee.Department).Set("Email", employee.Email));
+                    //return RedirectToAction("About");
+
+                    return View("Default");
+                    //return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
+
             }
+            return View();
         }
 
         // GET: EmployeeController/Delete/5
@@ -125,3 +143,16 @@ namespace ViewComponentEmployee.Controllers
         }
     }
 }
+
+//var empList= _employeeList.Where(x => x.empid == id)
+//     .Select(g => new Employee()
+//     {
+//         empid = g.empid,
+//         empname = g.empname,
+//         Email = g.Email,
+//         Department = g.Department
+
+//     }).ToList();
+
+//return View(empList);
+//return View();

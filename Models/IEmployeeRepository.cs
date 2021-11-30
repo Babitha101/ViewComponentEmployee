@@ -7,14 +7,14 @@ namespace ViewComponentEmployee.Models
 {
     public interface IEmployeeRepository
     {
-        IEnumerable<Employee> GetEmployees();
+        IEnumerable<HeadCountModel> GetEmployees();
         //Employee GetEmployee(int id);
 
         //IEnumerable<Employee> GetEmployee(int id);
 
-        Employee Update(Employee updatedemployee);
-        Employee Add(Employee employee);
-        Employee Delete(int id);
+        HeadCountModel Update(HeadCountModel updatedemployee);
+        HeadCountModel Add(HeadCountModel employee);
+        HeadCountModel Delete(int id);
 
         IEnumerable<DeptHeadCount> EmployeeCountByDept();
     }
