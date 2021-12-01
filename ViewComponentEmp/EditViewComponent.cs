@@ -11,21 +11,15 @@ namespace ViewComponentEmployee.ViewComponentEmp
 {
     public class EditViewComponent : ViewComponent
     {
-        IMongoClient mongoClient = new MongoClient("mongodb://localhost:27017");
-
-        //public EditViewComponent(IEmployeeRepository employeeRepository)
-        //{
-        //    this.employeeRepository = employeeRepository;
-        //}
-
+        private readonly IEmployeeRepository _employeeRepository;
+        public EditViewComponent(IEmployeeRepository employeeRepository)
+        {
+            _employeeRepository = employeeRepository;
+        }
         public IViewComponentResult Invoke(string id)   
         {
-            var database = mongoClient.GetDatabase("Employee");
-            var collection = database.GetCollection<Employee>("Employees");
-
-            var EmployeeResult = collection.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).SingleOrDefault();
-            return View("Default", EmployeeResult);
-          
+            var EmployeeResult = _employeeRepository.GetEmployee(id);
+            return View("Default", EmployeeResult);          
         }
     }
 }

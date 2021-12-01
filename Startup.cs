@@ -9,6 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ViewComponentEmployee.Models;
+using MongoDB.Driver;
+using MongoDB.Bson;
+using Microsoft.Extensions.Logging;
+
 
 namespace ViewComponentEmployee
 {
@@ -25,12 +29,17 @@ namespace ViewComponentEmployee
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
-            services.AddSingleton(typeof(IEmployeeRepository), typeof(MockEmployeeRepository));
+
+
+            services.AddSingleton<IMongoClient, MongoClient>(sp => new MongoClient(Configuration.GetConnectionString("MongoDb")));
+            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+
+
+           // services.AddScoped<Models.Employee>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -42,6 +51,9 @@ namespace ViewComponentEmployee
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            loggerFactory.AddFile("D:/Project/Logs/Employee/mylog-{Date}.txt");
+
+            app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

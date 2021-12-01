@@ -11,12 +11,15 @@ namespace ViewComponentEmployee.ViewComponentEmp
 {
     public class EmployeeDetailsViewComponent : ViewComponent
     {
-        IMongoClient mongoClient = new MongoClient("mongodb://localhost:27017");
+        private readonly IEmployeeRepository _employeeRepository;
+        public EmployeeDetailsViewComponent(IEmployeeRepository employeeRespository)
+        {
+            _employeeRepository = employeeRespository;
+        }
         public IViewComponentResult Invoke()
         {
-            var database = mongoClient.GetDatabase("Employee");
-            var collection = database.GetCollection<Employee>("Employees");
-            var EmployeeResult = collection.Find<Employee>(a => true).ToList();
+
+            var EmployeeResult = _employeeRepository.GetEmployees();
             return View(EmployeeResult);
         }
 
