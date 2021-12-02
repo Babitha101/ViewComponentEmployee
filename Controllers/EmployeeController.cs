@@ -33,7 +33,7 @@ namespace ViewComponentEmployee.Controllers
         {
             var database = mongoClient.GetDatabase("Employee");
             var collection = database.GetCollection<Employee>("Employees");
-            var EmployeeResult = collection.Find<Employee>(a => true).ToList();
+            var EmployeeResult = collection.Find<Employee>("{}").ToList();
             return View(EmployeeResult);
         }
 
@@ -107,7 +107,7 @@ namespace ViewComponentEmployee.Controllers
 
                     var collection = database.GetCollection<Employee>("Employees");
 
-                    var update = collection.FindOneAndUpdateAsync(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id)), Builders<Employee>.Update.Set("empname",employee.empname).Set("Department", employee.Department).Set("Email", employee.Email));
+                    var update = collection.FindOneAndUpdateAsync(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id)), Builders<Employee>.Update.Set("Name",employee.Name).Set("Department", employee.Department).Set("Email", employee.Email));
                     //return RedirectToAction("About");
 
                     return View("Default");

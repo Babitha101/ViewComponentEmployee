@@ -21,7 +21,8 @@ namespace ViewComponentEmployee.Models
 
         public IEnumerable<Employee> GetEmployees()//Get All Employees
         {
-            var EmployeeResult = _employee.Find<Employee>(a => true).ToList();
+            var EmployeeResult = _employee.AsQueryable<Employee>().ToList();
+
             return EmployeeResult;
 
         }
@@ -29,7 +30,6 @@ namespace ViewComponentEmployee.Models
         {
             var EmployeeResult = _employee.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).ToList();
             return EmployeeResult;
-            //var EmployeeResult = collection.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).SingleOrDefault();
         }
         public Employee Add(Employee employee)
         {
@@ -54,37 +54,6 @@ namespace ViewComponentEmployee.Models
                     Count = g.Count()
                 }).ToList();
         }
-
-        //HeadCountModel IEmployeeRepository.Delete(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public HeadCountModel Add(HeadCountModel employee)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public IEnumerable<Employee> GetEmployee(int id)
-        //{
-        //    id = 1;
-        //    //Employee empModel = new Employee();
-
-
-        //    return _employeeList.Where(x => x.empid == id)
-        //         .Select(g => new Employee()
-        //         {
-        //             empid = g.empid,
-        //             empname = g.empname,
-        //             Email = g.Email,
-        //             Department = g.Department
-
-        //         }).ToList();
-
-        //    //return resultList;
-
-        //}
-
 
     }
 }

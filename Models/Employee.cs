@@ -15,7 +15,7 @@ namespace ViewComponentEmployee.Models
 
         [Required]
         [DataType(DataType.Text)]
-        public string empname { get; set; }
+        public string Name { get; set; }
         [Required]
         public string Department { get; set; }
         [Required]

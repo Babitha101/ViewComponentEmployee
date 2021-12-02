@@ -12,7 +12,8 @@ using ViewComponentEmployee.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using Microsoft.Extensions.Logging;
-
+using Serilog;
+using System.Diagnostics;
 
 namespace ViewComponentEmployee
 {
@@ -30,17 +31,15 @@ namespace ViewComponentEmployee
         {
             services.AddControllersWithViews();
 
-
             services.AddSingleton<IMongoClient, MongoClient>(sp => new MongoClient(Configuration.GetConnectionString("MongoDb")));
             services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-
-
-           // services.AddScoped<Models.Employee>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            Log.Information("Starting up");
+            loggerFactory.AddSerilog();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -53,7 +52,7 @@ namespace ViewComponentEmployee
             }
             loggerFactory.AddFile("D:/Project/Logs/Employee/mylog-{Date}.txt");
 
-            app.UseMiddleware<RequestLoggingMiddleware>();
+            app.UseMiddleware<ExceptionLoggingMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

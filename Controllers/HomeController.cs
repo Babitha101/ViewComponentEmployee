@@ -111,7 +111,7 @@ namespace ViewComponentEmployee.Controllers
 
                     var collection = database.GetCollection<Employee>("Employees");
 
-                    var update = collection.FindOneAndUpdateAsync(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id)), Builders<Employee>.Update.Set("empname", employee.empname).Set("Department", employee.Department).Set("Email", employee.Email));
+                    var update = collection.FindOneAndUpdateAsync(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id)), Builders<Employee>.Update.Set("Name", employee.Name).Set("Department", employee.Department).Set("Email", employee.Email));
                   
                     return ViewComponent("EmployeeDetails");
 

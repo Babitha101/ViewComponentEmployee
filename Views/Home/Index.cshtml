@@ -4,26 +4,11 @@
 
 <div class="text-center">
 
+    @await Component.InvokeAsync("EmployeeDetails")
+
     @*@await Component.InvokeAsync("HeadCount")*@
 
     @*@await Component.InvokeAsync("Edit")*@
 
-    @await Component.InvokeAsync("EmployeeDetails")
 
 </div>
-
-
-@*@{
-    ViewData["Title"] = "EmployeeDetail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<h1>Employee Detail</h1>
-<head>
-    <title>Employee</title>
-</head>
-<body>
-  
-</body>*@
-
-
-
