@@ -8,10 +8,10 @@ namespace ViewComponentEmployee.Models
     public interface IEmployeeRepository
     {
         IEnumerable<Employee> GetEmployees();
-        IEnumerable<Employee> GetEmployee(string id);
-        Employee Update(Employee updatedemployee);
-        Employee Add(Employee employee);
-        Employee Delete(int id);
+        Employee GetEmployee(string id);
+        void Update(Employee updatedemployee,string id);
+        void Add(Employee employee);
+        void Delete(string id);
         IEnumerable<DeptHeadCount> EmployeeCountByDept();
     }
 }

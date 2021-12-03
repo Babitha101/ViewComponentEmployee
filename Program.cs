@@ -24,7 +24,8 @@ namespace ViewComponentEmployee
                .ReadFrom.Configuration(config)
                .CreateLogger();
 
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();       
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

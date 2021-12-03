@@ -18,31 +18,28 @@ namespace ViewComponentEmployee.Models
             var collection = database.GetCollection<Employee>("Employees");
             _employee = collection;
         }
-
-        public IEnumerable<Employee> GetEmployees()//Get All Employees
+        public IEnumerable<Employee> GetEmployees()        //Get All Employees
         {
-            var EmployeeResult = _employee.AsQueryable<Employee>().ToList();
-
-            return EmployeeResult;
-
+            var employeeResult = _employee.AsQueryable<Employee>().ToList();
+            return employeeResult;
         }
-        public IEnumerable<Employee> GetEmployee(string id)//Get Employee By ID
+        public Employee GetEmployee(string id)      //Get Employee By ID
         {
-            var EmployeeResult = _employee.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).ToList();
-            return EmployeeResult;
+            var employeeResult = _employee.Find(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id))).FirstOrDefault();
+            return employeeResult;
         }
-        public Employee Add(Employee employee)
+        public void Add(Employee employee)//Insert Employee
         {
-            throw new NotImplementedException();
+            _employee.InsertOne(employee);
         }
-        public Employee Update(Employee updatedemployee)
+        public void Update(Employee employee, string id)         //Update Employee
         {
-            throw new NotImplementedException();
+             _employee.FindOneAndUpdateAsync(Builders<Employee>.Filter.Eq("id", ObjectId.Parse(id)), Builders<Employee>.Update.Set("Name", employee.Name).Set("Department", employee.Department).Set("Email", employee.Email));
         }
 
-        public Employee Delete(int id)
+        public void Delete(string id)          //Delete Employee
         {
-            throw new NotImplementedException();
+            _employee.DeleteOneAsync(a => a.id == id);
         }
 
         public IEnumerable<DeptHeadCount> EmployeeCountByDept()

@@ -23,12 +23,7 @@ namespace ViewComponentEmployee.Controllers
 
         public HomeController()
         {
-            //_employeeList = new List<Employee>(){ new Employee { empid=1,empname="John",Department="HR",Email="john@abc.com"},
-            //    new Employee { empid = 2, empname = "Arjun", Department = "IT", Email = "arjun@abc.com" },
-            //    new Employee { empid = 3, empname = "Kamal", Department = "Payroll", Email = "john@abc.com" },
-            //    new Employee { empid = 4, empname = "Divya", Department = "HR", Email = "john@abc.com" },
-            //    new Employee { empid = 5, empname = "Neha", Department = "Payroll", Email = "john@abc.com" }};
-
+            
         }
 
         // GET: EmployeeController

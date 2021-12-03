@@ -42,30 +42,29 @@ namespace ViewComponentEmployee
             loggerFactory.AddSerilog();
             if (env.IsDevelopment())
             {
+                app.UseMiddleware<ExceptionLoggingMiddleware>();
                 app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            loggerFactory.AddFile("D:/Project/Logs/Employee/mylog-{Date}.txt");
+                app.UseHsts();  // prevents the user from using untrusted or invalid certificates//forces all communication over HTTPS
+            }           
 
-            app.UseMiddleware<ExceptionLoggingMiddleware>();
+            loggerFactory.AddFile("D:/Project/Logs/Employee/mylog-{Date}.txt");
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Employee}/{action=Index}/{id?}");
             });
+            
         }
     }
 }
